@@ -1,14 +1,11 @@
 {
   pkgs ? import <nixpkgs> { },
-  stdenv ? pkgs.stdenv,
-  cc ? stdenv.cc,
-  patchelf ? pkgs.patchelf,
-  binutils ? pkgs.binutils,
+  cc ? pkgs.stdenv.cc,
   ...
 }:
 pkgs.mkShell {
   packages = [
-    patchelf
+    pkgs.patchelf
   ];
   shellHook = ''
     export _NIX_INTERPRETER=$(cat ${cc}/nix-support/dynamic-linker)
